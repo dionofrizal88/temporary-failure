@@ -14,10 +14,10 @@ func BackPressure() {
 		for i := 0; ; i++ {
 			select {
 			case data <- i:
-				log.Println("Mengirim data:", i)
+				log.Println("Send data:", i)
 
 			case <-done:
-				log.Println("Pengiriman data selesai")
+				log.Println("Send data success")
 				return
 			}
 			time.Sleep(time.Second)
@@ -29,13 +29,13 @@ func BackPressure() {
 
 		for d := range data {
 			time.Sleep(2 * time.Second)
-			log.Println("Menerima data:", d)
+			log.Println("Receive data:", d)
 			log.Println("Process data data:", d)
 		}
 	}()
 
 	time.Sleep(time.Second * 5)
-	log.Println("Menghentikan pengiriman data")
+	log.Println("Stop sending data")
 	done <- true
 
 }

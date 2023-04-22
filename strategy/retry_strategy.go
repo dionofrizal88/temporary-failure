@@ -13,7 +13,7 @@ func SendRequest(httpReq string, attempt int8) (*http.Response, error) {
 	configs := []retry.Option{
 		retry.Attempts(uint(attempt)),
 		retry.OnRetry(func(n uint, err error) {
-			log.Printf("Retry request %d to and get error: %v", n+1, err)
+			log.Printf("Retry request %d and get error: %v", n+1, err)
 		}),
 		retry.Delay(time.Second),
 	}
